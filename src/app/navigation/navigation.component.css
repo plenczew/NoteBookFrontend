@@ -1,0 +1,21 @@
+a {
+  background-color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  padding: 1px 20px;
+  border: 2px solid rgb(10, 199, 10);
+  margin: 5px 5px;
+  display: inline-block
+}
+
+a:active, a:hover {
+  background-color: rgb(10, 199, 10);
+  text-decoration: none;
+  font-size: 15px;
+  color: white;
+  padding: 1px 20px;
+  border: 2px solid rgb(10, 199, 10);
+  margin: 5px 5px;
+  display: inline-block
+}

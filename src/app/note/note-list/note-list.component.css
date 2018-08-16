@@ -1,0 +1,25 @@
+.mat-row:hover{
+  background-color: rgb(238, 238, 238);
+}
+
+.mat-row:active{
+  background-color: lightgrey;
+}
+
+.mat-column-id {
+  width: 35px
+}
+
+.mat-column-title {
+  width: 150px
+}
+
+.mat-column-content {
+  width: 200px
+}
+
+.mat-select-width{
+  width: 30px;
+}
+
+
