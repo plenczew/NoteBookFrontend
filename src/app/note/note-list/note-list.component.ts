@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../../service/note.service';
-import { MatTableDataSource, MatTable, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource,
+  MatTable, MatPaginator, MatSort, MatDialog, MatDialogRef, MatDialogConfig, MatIconRegistry } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Note } from '../../model/note.model';
 import { NoteHttpService } from '../../service/note-http.service';
 import { element } from 'protractor';
 import { Router } from '@angular/router';
+import { SendEmailComponent } from '../send-email/send-email.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-note-list',
@@ -18,16 +21,23 @@ export class NoteListComponent implements OnInit {
   dataSource: MatTableDataSource<Note>;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: string[] = ['id', 'title', 'content', 'actions'];
+  columnsToDisplay: string[] = ['id', 'title', 'content', 'created', 'actions'];
 
-  constructor(private noteService: NoteService, private router: Router) {
+  sendEmailDialogRef: MatDialogRef<SendEmailComponent>;
+
+  constructor(private noteService: NoteService, private router: Router, private dialog: MatDialog,
+    private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
+      iconRegistry.addSvgIcon('done', sanitizer.bypassSecurityTrustResourceUrl('assets/img/done.svg'));
+      iconRegistry.addSvgIcon('edit', sanitizer.bypassSecurityTrustResourceUrl('assets/img/edit.svg'));
+      iconRegistry.addSvgIcon('remove', sanitizer.bypassSecurityTrustResourceUrl('assets/img/remove.svg'));
+      iconRegistry.addSvgIcon('email', sanitizer.bypassSecurityTrustResourceUrl('assets/img/email.svg'));
   }
 
   ngOnInit() {
     this.noteService.getAllNotesFromDb().subscribe(data => {
-      this.allNotes = data;
-      this.allNotes.sort((n1: Note, n2: Note) => n1.id - n2.id );
-      this.dataSource = new MatTableDataSource<Note>(this.allNotes);
+      this.allNotes = data.slice().filter(ele => ele.done === false);
+      this.allNotes.sort((n1: Note, n2: Note) => n1.id - n2.id);
+      this.dataSource = new MatTableDataSource(this.allNotes);
       this.dataSource.sort = this.sort;
     });
   }
@@ -36,6 +46,7 @@ export class NoteListComponent implements OnInit {
     this.noteService.deleteNote(note).subscribe(
       data => {
         this.allNotes = this.allNotes.filter(n => n !== note);
+        this.dataSource = new MatTableDataSource<Note>(this.allNotes);
       });
   }
 
@@ -43,9 +54,18 @@ export class NoteListComponent implements OnInit {
     this.router.navigate(['editNote', note.id]);
   }
 
+  setAsDone(note: Note): void {
+    this.allNotes = this.allNotes.filter(n => n !== note);
+    this.dataSource = new MatTableDataSource<Note>(this.allNotes);
+    note.reminderSend = true;
+    note.done = true;
+    this.noteService.saveNote(note).subscribe();
+  }
 
-  // selectRow(row: Note) {
-  //   this.noteService.setEditNote(row);
-  //   this.router.navigate(['editNote']);
-  // }
+  openSendEmailDialog(note: Note) {
+    this.sendEmailDialogRef = this.dialog.open(SendEmailComponent);
+    this.sendEmailDialogRef.componentInstance.subject = note.title;
+    this.sendEmailDialogRef.componentInstance.emailContent = 'Note Title: ' + note.title + '\n' +
+    'Note: ' + note.content;
+  }
 }

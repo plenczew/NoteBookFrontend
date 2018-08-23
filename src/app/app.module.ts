@@ -16,7 +16,11 @@ import {MatInputModule,
    MatTableModule,
    MatButtonToggleModule,
    MatAutocompleteModule,
-   MatSlideToggleModule, MatToolbarModule, MatSidenavModule, MatPaginator, MatPaginatorModule, MatSortModule} from '@angular/material';
+   MatSlideToggleModule,
+   MatToolbarModule,
+   MatSidenavModule,
+   MatPaginator,
+   MatPaginatorModule, MatSortModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatIconModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -27,6 +31,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { EditNoteComponent } from './note/edit-note/edit-note.component';
 import { TextFormatPipe } from './utilities/text-format.pipe';
+import { SendEmailComponent } from './note/send-email/send-email.component';
+import { DoneListComponent } from './note/done-list/done-list.component';
 
 
 
@@ -37,7 +43,9 @@ import { TextFormatPipe } from './utilities/text-format.pipe';
     NoteListComponent,
     NavigationComponent,
     EditNoteComponent,
-    TextFormatPipe
+    TextFormatPipe,
+    SendEmailComponent,
+    DoneListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +67,14 @@ import { TextFormatPipe } from './utilities/text-format.pipe';
     MatToolbarModule,
     MatSidenavModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
 
   ],
+  entryComponents: [SendEmailComponent],
   providers: [NoteService, NoteHttpService],
   bootstrap: [AppComponent]
 })

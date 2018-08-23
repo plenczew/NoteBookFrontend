@@ -3,6 +3,7 @@ import { NoteHttpService } from './note-http.service';
 import { Note } from '../model/note.model';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Email } from '../model/email.model';
 
 @Injectable()
 export class NoteService {
@@ -31,6 +32,14 @@ export class NoteService {
   public getNoteFromDb(id: number) {
     return this.noteHttpService.getNoteByIdFromDb(id);
   }
+
+  public sendEmail(email: Email) {
+    return this.noteHttpService.sendEmail(email);
+  }
+
+  // public sendReminder(email: Email, reminder: string) {
+  //   return this.noteHttpService.sendReminder(email, reminder);
+  // }
 
   //  getNote(id: number | string) {
   //   return this.getNoteList().pipe(map(data => this.noteList.find(note => note.id === +id)));

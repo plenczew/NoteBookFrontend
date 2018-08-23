@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Note } from '../model/note.model';
 import { Observable } from 'rxjs';
+import { Email } from '../model/email.model';
 
 @Injectable()
 export class NoteHttpService {
@@ -26,5 +27,13 @@ export class NoteHttpService {
   getNoteByIdFromDb(id: number) {
     return this.http.get<Note>(this.URL_DB + '/note/' + id);
   }
+
+  sendEmail(email: Email) {
+    return this.http.post<Email>('http://localhost:8080/email' + '/send', email);
+  }
+
+  // sendReminder(email: Email, reminder: string) {
+  //   return this.http.post<Email>('http://localhost:8080/email' + '/reminder/' + reminder, email);
+  // }
 
 }

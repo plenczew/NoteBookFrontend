@@ -4,6 +4,7 @@ import { NoteService } from '../../service/note.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { NoteDates } from '../../model/note-dates.model';
 
 
 @Component({
@@ -13,21 +14,35 @@ import { Observable } from 'rxjs';
 })
 export class EditNoteComponent implements OnInit {
 
-  note: Note = new Note();
+  id: number;
+  title: string;
+  content: string;
+  noteDates: NoteDates;
+  reminderSend: boolean;
 
-  constructor(private noteService: NoteService, private route: ActivatedRoute) {
-   }
+  constructor(private noteService: NoteService, private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.noteService.getNoteFromDb(+this.route.snapshot.paramMap.get('id'))
-    .subscribe(data => {
-      this.note = data;
-    });
+      .subscribe(data => {
+        this.id = data.id;
+        this.title = data.title;
+        this.content = data.content;
+        this.noteDates = data.noteDates;
+        this.reminderSend = data.reminderSend;
+      });
   }
 
   updateNote() {
-    console.log(this.note);
-    this.noteService.saveNote(this.note).subscribe();
+    const note: Note = ({
+      id: this.id, title: this.title, content: this.content, noteDates: {id: this.noteDates.id,
+        creationDate: this.noteDates.creationDate,
+        updateDate: new Date().toLocaleString(), endDate: this.noteDates.endDate, remindDate: this.noteDates.remindDate
+      }, done: false, reminderSend: this.reminderSend
+    });
+    this.noteService.saveNote(note).subscribe();
+    this.router.navigate(['noteList']);
   }
 
 }

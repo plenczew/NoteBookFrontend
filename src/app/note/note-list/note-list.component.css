@@ -18,6 +18,18 @@
   width: 200px
 }
 
+.mat-column-created {
+  width: 100px;
+}
+
+.mat-column-actions {
+  width: 200px;
+}
+
+.mat-icon {
+  padding: 3px;
+}
+
 .mat-select-width{
   width: 30px;
 }
