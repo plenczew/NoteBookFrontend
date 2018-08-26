@@ -1,7 +1,24 @@
-<mat-toolbar class="form-col">
-  <span>
+<!-- <mat-toolbar fxLayoutAlign="center center">
+  <span >
     <a routerLink="addNote">Add Note</a>
     <a routerLink="noteList">Note List</a>
     <a routerLink="doneList">Done List</a>
   </span>
+</mat-toolbar> -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div>
+        <button *ngIf="logged" mat-button routerLink="addNote">Add Task</button>
+        <button *ngIf="logged" mat-button routerLink="noteList">Task List</button>
+        <button *ngIf="logged" mat-button routerLink="doneList">Done List</button>
+        <button *ngIf="logged" mat-button (click)="logOut()">Log Out</button>
+        <button *ngIf="!logged" mat-button routerLink="login">Log In</button>
+        <button *ngIf="!logged" mat-button routerLink="register">Register</button>
+      </div>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>

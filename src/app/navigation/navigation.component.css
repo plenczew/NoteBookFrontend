@@ -19,3 +19,11 @@ a:active, a:hover {
   margin: 5px 5px;
   display: inline-block
 }
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

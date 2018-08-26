@@ -20,6 +20,7 @@ export class AddNoteComponent implements OnInit {
   minutes: Array<number>;
 
   showHideSetReminder: boolean;
+  reminderButton: string;
 
   constructor(private noteService: NoteService) {
     this.hours = Array(24).fill(0).map((x, i) => i);
@@ -28,6 +29,7 @@ export class AddNoteComponent implements OnInit {
 
   ngOnInit() {
     this.showHideSetReminder = false;
+    this.reminderButton = 'Set Reminder';
   }
 
   hourValidation() {
@@ -68,9 +70,12 @@ export class AddNoteComponent implements OnInit {
   // }
 
   showHideSetReminderFields() {
-    console.log(this.showHideSetReminder);
     this.showHideSetReminder = !this.showHideSetReminder;
-    console.log(this.showHideSetReminder);
+    if ( this.showHideSetReminder) {
+      this.reminderButton = 'Disable reminder';
+    } else {
+      this.reminderButton = 'Set reminder';
+    }
   }
 
   clearAddForm() {

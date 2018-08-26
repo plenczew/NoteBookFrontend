@@ -1,19 +1,21 @@
+<div >
 <h1 mat-dialog-title>Send Email</h1>
 
-<mat-dialog-content>
-    <mat-form-field>
-      <input matInput [(ngModel)]="to" placeholder="address">
+<mat-dialog-content fxLayout="column">
+    <mat-form-field style="width:400px">
+      <input matInput [(ngModel)]="to" placeholder="Email address">
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput [(ngModel)]="subject" placeholder="subject">
+    <mat-form-field style="width:400px">
+      <input matInput [(ngModel)]="subject" placeholder="Subject">
     </mat-form-field>
 
-    <mat-form-field>
-      <textarea matInput [(ngModel)]="emailContent" placeholder="content"></textarea>
+    <mat-form-field style="width:400px">
+      <textarea matInput rows="8" [(ngModel)]="emailContent" placeholder="Content"></textarea>
     </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close type="submit" (click)="sendEmail()">Send</button>
+    <button mat-raised-button mat-dialog-close type="submit" (click)="sendEmail()">Send email</button>
 </mat-dialog-actions>
+</div>

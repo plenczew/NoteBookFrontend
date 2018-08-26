@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Task Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Details">
+        <p>
+          Title: {{note.title}}
+        </p>
+        <p>
+          Task: {{note.content}}
+        </p>
+      </mat-tab>
+      <mat-tab label="Dates">
+        <p>
+          Task creation date: {{note.noteDates.creationDate}}
+        </p>
+        <p *ngIf="updateDateFlag">
+          Task update date: {{note.noteDates.updateDate}}
+        </p>
+        <p *ngIf="reminderDateFlag">
+          Task reminder date: {{note.noteDates.remindDate}}
+        </p>
+        <p *ngIf="doneDateFlag">
+          Task set as done date: {{note.noteDates.endDate}}
+        </p>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>

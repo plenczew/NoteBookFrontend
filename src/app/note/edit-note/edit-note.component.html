@@ -1,9 +1,103 @@
-<div class="form-col">
-  <mat-form-field>
+<!-- <div fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field style="width:600px">
     <input matInput type="text" id="name" name="name" [(ngModel)]="title" placeholder="title">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field style="width:600px">
     <textarea matInput name="note" [(ngModel)]="content" id="note" placeholder="content"></textarea>
   </mat-form-field>
 </div>
-<button mat-raised-button type="submit" (click)="updateNote()"> Update </button>
+<div *ngIf="showHideUpdateReminder" fxLayout="row" fxLayoutAlign="center center">
+  <mat-form-field>
+    <input matInput [(ngModel)]="reminder" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+    <mat-form-field style="width:45px">
+      <mat-select placeholder="HH" [(ngModel)]="hour">
+        <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width:45px">
+      <mat-select placeholder="MM" [(value)]="minute">
+        <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="center">
+  <button mat-raised-button type="submit" (click)="updateNote()">Update Note</button>
+  <button mat-raised-button (click)="showHideUpdateReminderFields()">Set reminder</button>
+</div> -->
+
+<!-- <div fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field style="width:600px">
+    <input matInput type="text" id="name" name="name" [(ngModel)]="title" placeholder="Note Title">
+  </mat-form-field>
+  <mat-form-field style="width:600px">
+    <textarea matInput rows="3" name="note" [(ngModel)]="content" placeholder="Note" id="note"></textarea>
+  </mat-form-field>
+</div>
+<div *ngIf="showHideSetReminder" fxLayout="row" fxLayoutAlign="center center">
+  <mat-form-field>
+    <input matInput [(ngModel)]="reminder" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+    <mat-form-field style="width:45px">
+      <mat-select placeholder="HH" [(ngModel)]="hour">
+        <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width:45px">
+      <mat-select placeholder="MM" [(value)]="minute">
+        <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="center">
+  <button mat-raised-button type="submit" (click)="add()">Add Note</button>
+  <button mat-raised-button (click)="showHideSetReminderFields()">Set reminder</button>
+</div> -->
+
+<div fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Edit Task</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field style="width:500px">
+          <input matInput type="text" id="name" name="name" [(ngModel)]="title" placeholder="Task Title">
+        </mat-form-field>
+        <mat-form-field style="width:500px">
+          <textarea matInput rows="3" name="note" [(ngModel)]="content" placeholder="Task" id="note"></textarea>
+        </mat-form-field>
+      </div>
+      <div *ngIf="showHideUpdateReminder">
+        <p *ngIf="noteDates.remindDate !== null">Reminder date: {{noteDates.remindDate}}
+          <p>
+            <mat-form-field>
+              <input matInput [(ngModel)]="reminder" [matDatepicker]="picker" placeholder="New reminder date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field style="width:45px">
+              <mat-select placeholder="HH" [(ngModel)]="hour">
+                <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width:45px">
+              <mat-select placeholder="MM" [(value)]="minute">
+                <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+    </mat-card-content>
+    <div>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" (click)="updateNote() " color="primary">Update Task</button>
+        <button mat-raised-button (click)="showHideUpdateReminderFields()" color="primary">{{reminderButton}}</button>
+        <button mat-raised-button type="submit" (click)="goToNoteList()" color="primary">Cancle</button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>

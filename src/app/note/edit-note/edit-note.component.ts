@@ -14,13 +14,24 @@ import { NoteDates } from '../../model/note-dates.model';
 })
 export class EditNoteComponent implements OnInit {
 
+  showHideUpdateReminder: boolean;
+  hour: number;
+  minute: number;
+  hours: Array<number>;
+  minutes: Array<number>;
+  reminder: Date;
+
   id: number;
   title: string;
   content: string;
   noteDates: NoteDates;
   reminderSend: boolean;
 
+  reminderButton: string;
+
   constructor(private noteService: NoteService, private router: Router, private route: ActivatedRoute) {
+    this.hours = Array(24).fill(0).map((x, i) => i);
+    this.minutes = Array(60).fill(0).map((x, i) => i);
   }
 
   ngOnInit() {
@@ -31,17 +42,52 @@ export class EditNoteComponent implements OnInit {
         this.content = data.content;
         this.noteDates = data.noteDates;
         this.reminderSend = data.reminderSend;
+        if (typeof this.noteDates.remindDate === 'string') {
+          this.showHideUpdateReminder = true;
+        } else {
+          this.showHideUpdateReminder = false;
+        }
+        if ( this.showHideUpdateReminder) {
+          this.reminderButton = 'Disable reminder';
+        } else {
+          this.reminderButton = 'Set reminder';
+        }
       });
+
   }
 
   updateNote() {
+    if (this.showHideUpdateReminder) {
+    this.reminder.setHours(this.hour, this.minute);
     const note: Note = ({
       id: this.id, title: this.title, content: this.content, noteDates: {id: this.noteDates.id,
         creationDate: this.noteDates.creationDate,
-        updateDate: new Date().toLocaleString(), endDate: this.noteDates.endDate, remindDate: this.noteDates.remindDate
+        updateDate: new Date().toLocaleString(), remindDate: this.reminder.toLocaleString()
       }, done: false, reminderSend: this.reminderSend
     });
     this.noteService.saveNote(note).subscribe();
+    } else {
+      const note: Note = ({
+        id: this.id, title: this.title, content: this.content, noteDates: {id: this.noteDates.id,
+          creationDate: this.noteDates.creationDate,
+          updateDate: new Date().toLocaleString(), remindDate: null
+        }, done: false, reminderSend: this.reminderSend
+      });
+      this.noteService.saveNote(note).subscribe();
+    }
+    this.router.navigate(['noteList']);
+  }
+
+  showHideUpdateReminderFields() {
+    this.showHideUpdateReminder = !this.showHideUpdateReminder;
+    if ( this.showHideUpdateReminder) {
+      this.reminderButton = 'Disable reminder';
+    } else {
+      this.reminderButton = 'Set reminder';
+    }
+  }
+
+  goToNoteList() {
     this.router.navigate(['noteList']);
   }
 

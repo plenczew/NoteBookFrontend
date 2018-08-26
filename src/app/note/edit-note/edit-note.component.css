@@ -1,0 +1,6 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  justify-content: center;
+}

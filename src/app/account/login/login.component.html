@@ -1,0 +1,62 @@
+<!--
+
+<div class="container">
+  <div class="card card-container">
+    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+    <p id="profile-name" class="profile-name-card"></p>
+
+      <form name="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+      <span id="reauth-email" class="reauth-email"></span>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required />
+        <div *ngIf="f.submitted && !username.valid" class="help-block">an valid email is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      </div>
+      <div id="remember" class="checkbox">
+
+      </div>
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+    </form>
+      <a [routerLink]="['/register']" class="btn btn-link">Create new Account!</a>
+  </div>
+</div> -->
+<div fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <table cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field style="width: 400px">
+                <input matInput placeholder="E-mail" [(ngModel)]="user.username" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field style="width: 400px">
+                <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+    <div>
+      <mat-card-actions>
+        <button mat-raised-button (click)="login()" color="primary">Login</button>
+        <a mat-raised-button [routerLink]="['/register']" class="btn btn-link" color="primary">Create new Account!</a>
+      </mat-card-actions>
+    </div>
+      {{errorMessage}}
+  </mat-card>
+</div>

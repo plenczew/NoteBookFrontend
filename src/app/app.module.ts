@@ -20,7 +20,11 @@ import {MatInputModule,
    MatToolbarModule,
    MatSidenavModule,
    MatPaginator,
-   MatPaginatorModule, MatSortModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatIconModule} from '@angular/material';
+   MatPaginatorModule,
+   MatSortModule,
+   MatDialogModule,
+   MatDatepickerModule,
+   MatNativeDateModule, MatIconModule, MatCardModule, MatProgressSpinner, MatMenuModule, MatTabsModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -33,7 +37,13 @@ import { EditNoteComponent } from './note/edit-note/edit-note.component';
 import { TextFormatPipe } from './utilities/text-format.pipe';
 import { SendEmailComponent } from './note/send-email/send-email.component';
 import { DoneListComponent } from './note/done-list/done-list.component';
-
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { LoginComponent } from './account/login/login.component';
+import { RegisterComponent } from './account/register/register.component';
+import { ProfileComponent } from './account/profile/profile.component';
+import { UrlPermission } from './urlPermission/url.permission';
+import { LoggedComponent } from './logged/logged.component';
+import { NoteDetailsComponent } from './note/note-details/note-details.component';
 
 
 @NgModule({
@@ -45,10 +55,16 @@ import { DoneListComponent } from './note/done-list/done-list.component';
     EditNoteComponent,
     TextFormatPipe,
     SendEmailComponent,
-    DoneListComponent
+    DoneListComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    LoggedComponent,
+    NoteDetailsComponent
   ],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -71,11 +87,14 @@ import { DoneListComponent } from './note/done-list/done-list.component';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTabsModule
 
   ],
-  entryComponents: [SendEmailComponent],
-  providers: [NoteService, NoteHttpService],
+  entryComponents: [SendEmailComponent, NoteDetailsComponent],
+  providers: [NoteService, NoteHttpService, UrlPermission, LoginComponent, NavigationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

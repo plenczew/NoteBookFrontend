@@ -1,3 +1,34 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  justify-content: center;
+}
+
+.mat-column-id {
+  width: 20px ;
+}
+
+.mat-column-title {
+  width: 120px;
+}
+
+.mat-column-content {
+  width: 250px;
+}
+
+.mat-column-created {
+  width: 100px;
+}
+
+.mat-column-reminder {
+  width: 80px;
+}
+
+.mat-column-actions {
+  width: 30px;
+}
+
 .mat-row:hover{
   background-color: rgb(238, 238, 238);
 }
@@ -6,32 +37,5 @@
   background-color: lightgrey;
 }
 
-.mat-column-id {
-  width: 35px
-}
-
-.mat-column-title {
-  width: 150px
-}
-
-.mat-column-content {
-  width: 200px
-}
-
-.mat-column-created {
-  width: 100px;
-}
-
-.mat-column-actions {
-  width: 200px;
-}
-
-.mat-icon {
-  padding: 3px;
-}
-
-.mat-select-width{
-  width: 30px;
-}
 
 
